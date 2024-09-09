@@ -6,7 +6,7 @@
 
 // Lookup array for Soundex codes
 static const char soundexCodes[256] = {
-    ['A'] = '7', ['E'] = '7', ['I'] = '7', ['O'] = '7', ['U'] = '7',
+    ['A'] = '0', ['E'] = '0', ['I'] = '0', ['O'] = '0', ['U'] = '0',
     ['B'] = '1', ['F'] = '1', ['P'] = '1', ['V'] = '1',
     ['C'] = '2', ['G'] = '2', ['J'] = '2', ['K'] = '2', ['Q'] = '2',
     ['S'] = '2', ['X'] = '2', ['Z'] = '2',
@@ -14,6 +14,8 @@ static const char soundexCodes[256] = {
     ['L'] = '4',
     ['M'] = '5', ['N'] = '5',
     ['R'] = '6',
+    ['H'] = '0', ['W'] = '0',
+    [' '] = '0'  // Default characters
 };
 
 // Default to '0' for characters not explicitly listed
@@ -24,13 +26,16 @@ char getSoundexCode(char c) {
     return soundexCodes[toupper(c)];
 }
 
+int isVowel(char c) {
+    c = toupper(c);
+    return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
+}
+
 // Checks if the current character should be added to the Soundex code
 int shouldAddCode(char prevCode, char currentCode) {
     // Skip zero codes and adjacent same codes
-    if (currentCode == '0' || currentCode == prevCode) return 0;
-    return (currentCode != prevCode); // Add if different from previous
+    return (currentCode != '0' && currentCode != prevCode);
 }
-
 
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
@@ -52,12 +57,10 @@ void generateSoundex(const char *name, char *soundex) {
         char currentCode = getSoundexCode(currentChar);
 
         // Handle the case where a vowel is between two characters with the same code
-        if (currentCode == '7'&& i+1 < len) {  
-                char nextCode = getSoundexCode(name[i + 1]);
-                if (prevCode == nextCode) {
-                    soundex[sIndex++];
-                    break;
-                }
+        char nextCode = getSoundexCode(name[i + 1]);
+        if (prevCode == nextCode && isVowel(currentChar)) {
+            i++;  
+            continue;
         }
 
         // Decide whether to add the current code based on previous code
