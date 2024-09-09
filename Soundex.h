@@ -17,6 +17,18 @@ char getSoundexCode(char c) {
     return '0';  // ( W, H and other characters)
     
 }
+void nullstring(const char *nullstr){
+    soundex[0] = '\0';  // Return an empty soundex 
+    return;
+}
+
+void handling_vowels(const char *prev, const char *nextstr)
+{
+    if(prevCode == nextCode){
+        return 1;
+    }
+    return 0;
+    }
 
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
@@ -24,10 +36,9 @@ void generateSoundex(const char *name, char *soundex) {
     //Check for NULL
     if(name == NULL || name[0] === '\0')
     {
-        soundex[0] = '\0';  // Return an empty soundex 
-        return;
+        nullstring;
     }    
-
+    
     // Keep the first letter unchanged
     soundex[0] = toupper(name[0]);  
     int sIndex = 1;
@@ -48,21 +59,16 @@ void generateSoundex(const char *name, char *soundex) {
             soundex[sIndex++] = currentCode;
             prevCode = currentCode;
         }
-        
-        // Vowels inbetween two same numbers
+       
+        // Handle the case where a vowel is between two characters with the same code
         if (currentCode == '7') {  
-           if (i + 1 < len) {
-               char nextCode = getSoundexCode(name[i + 1]);
-               if(prevCode == nextCode){
-                   soundex[sIndex++] = currentCode; 
-                   prevCode = currentCode;
-               }
-                else
-                   break;
-               }        
-            }   
+            char nextCode = getSoundexCode(name[i+1]);
+            char vowel_check = handling_vowels(prevCode, nextCode);
+            if(vowel_check == 1)
+            {
+                soundex[sIndex++] = currentCode;
+            }
     }
-
     while (sIndex < 4) {
         soundex[sIndex++] = '0';  // Pad with zeros if needed
     }
