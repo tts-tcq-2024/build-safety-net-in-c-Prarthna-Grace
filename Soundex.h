@@ -29,7 +29,8 @@ void initializeSoundexCodes() {
     soundexCodes['L'] = '4';
     soundexCodes['M'] = soundexCodes['N'] = '5';
     soundexCodes['R'] = '6';
-    // Vowels and others default to '0'
+    soundexCodes['A'] = soundexCodes['E'] = soundexCodes['I'] = soundexCodes['O'] = soundexCodes['U'] = '7';
+    //  others default to '0'
 }
 
 // Returns the Soundex code for a given character
@@ -45,14 +46,11 @@ if (name == NULL || name[0] == '\0') {
     return;
 }
 }
+
 void first_letter(char *name, char *soundex)
 {
     // Keep the first letter unchanged
     soundex[0] = toupper(name[0]);  
-}
-
-int isVowel(char c) {
-    return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
 }
 
 // Checks if the current character should be added to the Soundex code
@@ -66,11 +64,10 @@ void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevC
         char currentCode = getSoundexCode(name[i]);
         char nextCode = (i + 1 < len) ? getSoundexCode(name[i + 1]) : '0';
 
-        if (isVowel(name[i]) && *prevCode == nextCode) {
+        if (currentCode=='7' && *prevCode == nextCode) {
             *prevCode = currentCode;
         }
-
-        if (shouldAddCode(*prevCode, currentCode)) {
+        else if (shouldAddCode(*prevCode, currentCode)) {
             soundex[(*sIndex)++] = currentCode;
             *prevCode = currentCode;
         }
@@ -86,7 +83,6 @@ void zero_Padding(char *soundex) {
 }
 
 void generateSoundex(const char *name, char *soundex) {
-    c = toupper(c);
     int len = strlen(name);   
     null_check(name, soundex); 
     int sIndex = 1;
