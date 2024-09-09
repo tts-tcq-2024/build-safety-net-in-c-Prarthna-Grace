@@ -14,7 +14,7 @@ char getSoundexCode(char c) {
     if (strchr("MN", c)) return '5';
     if (c == 'R') return '6';
     if (strchr("AEIOU", c)) return '7';
-    return '0';  // For vowels ( W, H and other characters)
+    return '0';  // ( W, H and other characters)
     
 }
 
@@ -38,11 +38,17 @@ void generateSoundex(const char *name, char *soundex) {
         char currentChar = name[i];
         char currentCode = getSoundexCode(currentChar);
 
+        //Skipped codes
+        if (currentCode == '0') {
+            continue;
+        }
+        
         // If the current code differs from the previous, append it to soundex
         if (currentCode != prevCode) {  
             soundex[sIndex++] = currentCode;
             prevCode = currentCode;
         }
+        
         // Vowels inbetween two same numbers
         if (currentCode == '7') {  
            if (i + 1 < len) {
@@ -50,13 +56,11 @@ void generateSoundex(const char *name, char *soundex) {
                if(prevCode == nextCode){
                    soundex[sIndex++] = currentCode; 
                    prevCode = currentCode;
+               }
                 else
-                   continue;
+                   break;
                }        
             }   
-        }
-
-        
     }
 
     while (sIndex < 4) {
