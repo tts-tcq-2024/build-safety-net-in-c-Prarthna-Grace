@@ -92,7 +92,7 @@ void generateSoundex(const char *name, char *soundex) {
     int sIndex = 1;
     char prevCode = getSoundexCode(name[0]);
     appendSoundexCode(name, soundex, &sIndex, &prevCode, len);
-    zero_padding(soundex);
+    zero_Padding(soundex);
 }
 
 #endif // SOUNDEX_H
