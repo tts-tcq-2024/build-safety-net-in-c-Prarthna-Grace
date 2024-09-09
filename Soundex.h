@@ -56,6 +56,11 @@ int shouldAddCode(char prevCode, char currentCode) {
     return (currentCode != '0' && currentCode != prevCode);
 }
 
+// Helper function to handle vowel skipping
+int shouldSkipVowel(char currentChar, char prevCode, char nextCode) {
+    return isVowel(currentChar) && (prevCode == nextCode);
+}
+
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
     
@@ -77,11 +82,10 @@ void generateSoundex(const char *name, char *soundex) {
 
         // Handle the case where a vowel is between two characters with the same code
         char nextCode = (i + 1 < len) ? getSoundexCode(name[i + 1]) : '0';
-        if (isVowel(currentChar) && prevCode == nextCode) {
+       if (shouldSkipVowel(currentChar, prevCode, nextCode)) {
             prevCode = currentCode;
             continue;
-            }
-
+        }
         // Decide whether to add the current code based on previous code
         if (shouldAddCode(prevCode, currentCode)) {
             soundex[sIndex++] = currentCode;
