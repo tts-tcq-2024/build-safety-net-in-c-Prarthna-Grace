@@ -14,8 +14,10 @@ static const char soundexCodes[256] = {
     ['L'] = '4',
     ['M'] = '5', ['N'] = '5',
     ['R'] = '6',
-    ['W'] = '0', ['H'] = '0' // Ignored characters
 };
+
+// Default to '0' for characters not explicitly listed
+static const char defaultSoundexCode = '0';
 
 // Returns the Soundex code for a given character
 char getSoundexCode(char c) {
