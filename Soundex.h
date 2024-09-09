@@ -18,10 +18,12 @@ char getSoundexCode(char c) {
     
 }
 
-int aresame(char prev, char next)
-{
-  return (prev==next);
+// Checks if the current character should be added to the Soundex code
+int shouldAddCode(char prevCode, char currentCode, int position) {
+    if (currentCode == '0') return 0; // Skip zero codes
+    return (currentCode != prevCode); // Add if different from previous
 }
+
 
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
@@ -42,29 +44,22 @@ void generateSoundex(const char *name, char *soundex) {
         char currentChar = name[i];
         char currentCode = getSoundexCode(currentChar);
 
-        //Skipped codes
-        if (currentCode == '0') {
-            continue;
-        }
-
         // Handle the case where a vowel is between two characters with the same code
-        if (currentCode == '7') {  
-            if (i + 1 < len) {
+        if (currentCode == '7'&& i+1 < len) {  
                 char nextCode = getSoundexCode(name[i + 1]);
-                if (areSameCode(prevCode, nextCode)) {
+                if (prevCode == nextCode) {
                     soundex[sIndex++] = currentCode;
                     prevCode = currentCode;
-                    continue;
                 }
-            }
         }
 
-        // If the current code differs from the previous, append it to Soundex
-        if (currentCode != prevCode) {
+        // Decide whether to add the current code based on previous code
+        if (shouldAddCode(prevCode, currentCode)) {
             soundex[sIndex++] = currentCode;
             prevCode = currentCode;
         }
     }
+    
     while (sIndex < 4) {
         soundex[sIndex++] = '0';  // Pad with zeros if needed
     }
