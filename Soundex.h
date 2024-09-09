@@ -28,10 +28,6 @@ void generateSoundex(const char *name, char *soundex) {
         char currentChar = name[i];
         char currentCode = getSoundexCode(currentChar);
 
-        if (currentCode == '0') {  // Skip vowels, but continue to next
-            prevCode = '0';  // Reset prevCode since vowels separate similar codes
-            continue;
-        }
 
         if (currentCode == '7') {  // If H or W, check the next character but don’t add
             continue;
