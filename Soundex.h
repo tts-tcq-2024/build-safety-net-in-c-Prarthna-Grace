@@ -4,20 +4,41 @@
 #include <ctype.h>
 #include <string.h>
 
-// Lookup array for Soundex codes
-static char soundexCodes[256] = 
-{
-        {'B', '1'}, {'F', '1'}, {'P', '1'}, {'V', '1'},
-        {'C', '2'}, {'G', '2'}, {'J', '2'}, {'K', '2'}, {'Q', '2'},
-        {'S', '2'}, {'X', '2'}, {'Z', '2'},
-        {'D', '3'}, {'T', '3'},
-        {'L', '4'},
-        {'M', '5'}, {'N', '5'},
-        {'R', '6'}
-};
+// Define and initialize the Soundex codes array
+static char soundexCodes[256];
 
-// Default to '0' for characters not explicitly listed
-static const char defaultSoundexCode = '0';
+// Function to initialize the Soundex codes array
+void initializeSoundexCodes() {
+    // Initialize all characters to default Soundex code '0'
+    for (int i = 0; i < 256; i++) {
+        soundexCodes[i] = '0';
+    }
+
+    // Set specific characters
+    soundexCodes['A'] = '0'; soundexCodes['E'] = '0';
+    soundexCodes['I'] = '0'; soundexCodes['O'] = '0';
+    soundexCodes['U'] = '0';
+    
+    soundexCodes['B'] = '1'; soundexCodes['F'] = '1';
+    soundexCodes['P'] = '1'; soundexCodes['V'] = '1';
+    
+    soundexCodes['C'] = '2'; soundexCodes['G'] = '2';
+    soundexCodes['J'] = '2'; soundexCodes['K'] = '2';
+    soundexCodes['Q'] = '2'; soundexCodes['S'] = '2';
+    soundexCodes['X'] = '2'; soundexCodes['Z'] = '2';
+    
+    soundexCodes['D'] = '3'; soundexCodes['T'] = '3';
+    
+    soundexCodes['L'] = '4';
+    
+    soundexCodes['M'] = '5'; soundexCodes['N'] = '5';
+    
+    soundexCodes['R'] = '6';
+    
+    soundexCodes['H'] = '0'; soundexCodes['W'] = '0';
+    soundexCodes[' '] = '0'; // Default for spaces
+}
+
 
 // Returns the Soundex code for a given character
 char getSoundexCode(char c) {
