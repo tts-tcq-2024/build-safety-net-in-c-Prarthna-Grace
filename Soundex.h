@@ -4,18 +4,22 @@
 #include <ctype.h>
 #include <string.h>
 
+// Lookup array for Soundex codes
+static const char soundexCodes[256] = {
+    ['A'] = '0', ['E'] = '0', ['I'] = '0', ['O'] = '0', ['U'] = '0',
+    ['B'] = '1', ['F'] = '1', ['P'] = '1', ['V'] = '1',
+    ['C'] = '2', ['G'] = '2', ['J'] = '2', ['K'] = '2', ['Q'] = '2',
+    ['S'] = '2', ['X'] = '2', ['Z'] = '2',
+    ['D'] = '3', ['T'] = '3',
+    ['L'] = '4',
+    ['M'] = '5', ['N'] = '5',
+    ['R'] = '6',
+    ['W'] = '0', ['H'] = '0' // Ignored characters
+};
+
+// Returns the Soundex code for a given character
 char getSoundexCode(char c) {
-    c = toupper(c);
-    
-    if (strchr("BFPV", c)) return '1';
-    if (strchr("CGJKQSXZ", c)) return '2';
-    if (strchr("DT", c)) return '3';
-    if (c == 'L') return '4';
-    if (strchr("MN", c)) return '5';
-    if (c == 'R') return '6';
-    if (strchr("AEIOU", c)) return '7';
-    return '0';  // ( W, H and other characters)
-    
+    return soundexCodes[toupper(c)];
 }
 
 // Checks if the current character should be added to the Soundex code
