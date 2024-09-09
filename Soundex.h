@@ -54,8 +54,8 @@ void generateSoundex(const char *name, char *soundex) {
         if (currentCode == '7'&& i+1 < len) {  
                 char nextCode = getSoundexCode(name[i + 1]);
                 if (prevCode == nextCode) {
-                    soundex[sIndex++] = currentCode;
-                    prevCode = currentCode;
+                    soundex[sIndex++];
+                    break;
                 }
         }
 
