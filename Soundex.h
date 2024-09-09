@@ -5,7 +5,7 @@
 #include <string.h>
 
 // Lookup array for Soundex codes
-static const char soundexCodes[256] = 
+static char soundexCodes[256] = 
 {
         {'B', '1'}, {'F', '1'}, {'P', '1'}, {'V', '1'},
         {'C', '2'}, {'G', '2'}, {'J', '2'}, {'K', '2'}, {'Q', '2'},
