@@ -52,7 +52,6 @@ void first_letter(char *name, char *soundex)
 }
 
 int isVowel(char c) {
-    c = toupper(c);
     return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
 }
 
@@ -87,6 +86,7 @@ void zero_Padding(char *soundex) {
 }
 
 void generateSoundex(const char *name, char *soundex) {
+    c = toupper(c);
     int len = strlen(name);   
     null_check(name, soundex); 
     int sIndex = 1;
