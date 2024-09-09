@@ -81,7 +81,6 @@ void generateSoundex(const char *name, char *soundex) {
             prevCode = currentCode;
             continue;
             }
-        }
 
         // Decide whether to add the current code based on previous code
         if (shouldAddCode(prevCode, currentCode)) {
