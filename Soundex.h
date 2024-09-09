@@ -90,6 +90,7 @@ void generateSoundex(const char *name, char *soundex) {
     // Keep the first letter unchanged
     soundex[0] = toupper(name[0]);  
     int sIndex = 1;
+    char prevCode = getSoundexCode(name[0]);
 
     appendSoundexCode(name, soundex, &sIndex, &prevCode, len);
    
