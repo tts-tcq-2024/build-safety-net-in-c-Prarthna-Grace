@@ -13,7 +13,6 @@ void initializeSoundexCodes() {
     for (int i = 0; i < 256; i++) {
         soundexCodes[i] = '0';
     }
-
     soundexCodes['B'] = soundexCodes['F'] = soundexCodes['P'] = soundexCodes['V'] = '1';
     soundexCodes['C'] = soundexCodes['G'] = soundexCodes['J'] = soundexCodes['K'] = '2';
     soundexCodes['Q'] = soundexCodes['S'] = soundexCodes['X'] = soundexCodes['Z'] = '2';
@@ -30,11 +29,12 @@ char getSoundexCode(char c) {
 }
  
 // Check for NULL or empty string
-void null_check(const char *name)
+void null_check(const char *name, char *soundex)
 {
 if (name == NULL || name[0] == '\0') {
     soundex[0] = '\0';  // Return an empty Soundex 
     return;
+}
 }
 
 int isVowel(char c) {
@@ -67,7 +67,7 @@ void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevC
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
     
-    null_check(name);
+    null_check(name, soundex);
     
     // Keep the first letter unchanged
     soundex[0] = toupper(name[0]);  
