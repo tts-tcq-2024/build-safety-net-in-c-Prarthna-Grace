@@ -25,8 +25,9 @@ char getSoundexCode(char c) {
 }
 
 // Checks if the current character should be added to the Soundex code
-int shouldAddCode(char prevCode, char currentCode, int position) {
-    if (currentCode == '0') return 0; // Skip zero codes
+int shouldAddCode(char prevCode, char currentCode) {
+    // Skip zero codes and adjacent same codes
+    if (currentCode == '0' || currentCode == prevCode) return 0;
     return (currentCode != prevCode); // Add if different from previous
 }
 
