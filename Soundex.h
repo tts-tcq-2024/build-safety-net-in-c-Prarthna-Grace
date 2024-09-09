@@ -14,31 +14,15 @@ void initializeSoundexCodes() {
         soundexCodes[i] = '0';
     }
 
-    // Set specific characters
-    soundexCodes['A'] = '0'; soundexCodes['E'] = '0';
-    soundexCodes['I'] = '0'; soundexCodes['O'] = '0';
-    soundexCodes['U'] = '0';
-    
-    soundexCodes['B'] = '1'; soundexCodes['F'] = '1';
-    soundexCodes['P'] = '1'; soundexCodes['V'] = '1';
-    
-    soundexCodes['C'] = '2'; soundexCodes['G'] = '2';
-    soundexCodes['J'] = '2'; soundexCodes['K'] = '2';
-    soundexCodes['Q'] = '2'; soundexCodes['S'] = '2';
-    soundexCodes['X'] = '2'; soundexCodes['Z'] = '2';
-    
-    soundexCodes['D'] = '3'; soundexCodes['T'] = '3';
-    
+    soundexCodes['B'] = soundexCodes['F'] = soundexCodes['P'] = soundexCodes['V'] = '1';
+    soundexCodes['C'] = soundexCodes['G'] = soundexCodes['J'] = soundexCodes['K'] = '2';
+    soundexCodes['Q'] = soundexCodes['S'] = soundexCodes['X'] = soundexCodes['Z'] = '2';
+    soundexCodes['D'] = soundexCodes['T'] = '3';
     soundexCodes['L'] = '4';
-    
-    soundexCodes['M'] = '5'; soundexCodes['N'] = '5';
-    
+    soundexCodes['M'] = soundexCodes['N'] = '5';
     soundexCodes['R'] = '6';
-    
-    soundexCodes['H'] = '0'; soundexCodes['W'] = '0';
-    soundexCodes[' '] = '0'; // Default for spaces
+    // Vowels and others default to '0'
 }
-
 
 // Returns the Soundex code for a given character
 char getSoundexCode(char c) {
