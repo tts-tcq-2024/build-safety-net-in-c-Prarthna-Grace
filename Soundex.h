@@ -40,11 +40,6 @@ int shouldAddCode(char prevCode, char currentCode) {
     return (currentCode != '0' && currentCode != prevCode);
 }
 
-// Helper function to handle vowel skipping
-int shouldSkipVowel(char currentChar, char prevCode, char nextCode) {
-    return isVowel(currentChar) && (prevCode == nextCode);
-}
-
 void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len) {
     for (int i = 1; i < len && *sIndex < 4; i++) {
         char currentCode = getSoundexCode(name[i]);
@@ -52,7 +47,6 @@ void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevC
 
         if (isVowel(name[i]) && *prevCode == nextCode) {
             *prevCode = currentCode;
-            continue;
         }
 
         if (shouldAddCode(*prevCode, currentCode)) {
