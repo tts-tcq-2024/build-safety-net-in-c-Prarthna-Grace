@@ -9,7 +9,6 @@ void initializeSoundexCodes();
 char getSoundexCode(char c);
 void null_check(const char *name, char *soundex);
 void first_letter(char *name, char *soundex);
-int isVowel(char c);
 void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len);
 void zero_Padding(char *soundex);
 
@@ -53,12 +52,6 @@ void first_letter(char *name, char *soundex)
     soundex[0] = toupper(name[0]);  
 }
 
-// Checks if the current character should be added to the Soundex code
-int shouldAddCode(char prevCode, char currentCode) {
-    // Skip zero codes and adjacent same codes
-    return (currentCode != '0' && currentCode != prevCode);
-}
-
 void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len) {
     for (int i = 1; i < len && *sIndex < 4; i++) {
         char currentCode = getSoundexCode(name[i]);
@@ -67,7 +60,8 @@ void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevC
         if (currentCode=='7' && *prevCode == nextCode) {
             *prevCode = currentCode;
         }
-        else if (shouldAddCode(*prevCode, currentCode)) {
+        // Add current code if it should be included
+        if (currentCode != '0' && currentCode != *prevCode) {
             soundex[(*sIndex)++] = currentCode;
             *prevCode = currentCode;
         }
