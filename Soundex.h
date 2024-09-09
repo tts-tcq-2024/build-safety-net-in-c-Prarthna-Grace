@@ -61,6 +61,23 @@ int shouldSkipVowel(char currentChar, char prevCode, char nextCode) {
     return isVowel(currentChar) && (prevCode == nextCode);
 }
 
+void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len) {
+    for (int i = 1; i < len && *sIndex < 4; i++) {
+        char currentCode = getSoundexCode(name[i]);
+        char nextCode = (i + 1 < len) ? getSoundexCode(name[i + 1]) : '0';
+
+        if (isVowel(name[i]) && *prevCode == nextCode) {
+            *prevCode = currentCode;
+            continue;
+        }
+
+        if (shouldAddCode(*prevCode, currentCode)) {
+            soundex[(*sIndex)++] = currentCode;
+            *prevCode = currentCode;
+        }
+    }
+}
+
 void generateSoundex(const char *name, char *soundex) {
     int len = strlen(name);
     
@@ -74,25 +91,8 @@ void generateSoundex(const char *name, char *soundex) {
     soundex[0] = toupper(name[0]);  
     int sIndex = 1;
 
-    // Track previous code
-    char prevCode = getSoundexCode(name[0]);  
-    for (int i = 1; i < len && sIndex < 4; i++) {
-        char currentChar = name[i];
-        char currentCode = getSoundexCode(currentChar);
-
-        // Handle the case where a vowel is between two characters with the same code
-        char nextCode = (i + 1 < len) ? getSoundexCode(name[i + 1]) : '0';
-       if (shouldSkipVowel(currentChar, prevCode, nextCode)) {
-            prevCode = currentCode;
-            continue;
-        }
-        // Decide whether to add the current code based on previous code
-        if (shouldAddCode(prevCode, currentCode)) {
-            soundex[sIndex++] = currentCode;
-            prevCode = currentCode;
-        }
-    }
-    
+    appendSoundexCode(name, soundex, &sIndex, &prevCode, len);
+   
     while (sIndex < 4) {
         soundex[sIndex++] = '0';  // Pad with zeros if needed
     }
