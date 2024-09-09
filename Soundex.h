@@ -57,10 +57,13 @@ void generateSoundex(const char *name, char *soundex) {
         char currentCode = getSoundexCode(currentChar);
 
         // Handle the case where a vowel is between two characters with the same code
-        char nextCode = getSoundexCode(name[i + 1]);
-        if (prevCode == nextCode && isVowel(currentChar)) {
-            i++;  
-            continue;
+        if (i + 1 < len) {
+            char nextChar = name[i + 1];
+            char nextCode = getSoundexCode(nextChar);
+            if (prevCode == nextCode && isVowel(currentChar)) {
+                i++;  // Skip the vowel
+                continue;
+            }
         }
 
         // Decide whether to add the current code based on previous code
