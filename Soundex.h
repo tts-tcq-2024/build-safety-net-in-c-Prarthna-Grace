@@ -5,7 +5,6 @@
 #include <ctype.h>
 #include <string.h>
 
-void initializeSoundexCodes();
 char getSoundexCode(char c);
 void null_check(const char *name, char *soundex);
 void first_letter(char *name, char *soundex);
@@ -64,7 +63,7 @@ void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevC
 
 void zero_Padding(char *soundex) {
     int len = strlen(soundex); /* len - current length of the soundex code */
-    while(len < 4) {
+    for (int i = 1; i < len && *sIndex < 4; i++) {
         soundex[len++] = '0';
     }
     soundex[4] = '\0';
