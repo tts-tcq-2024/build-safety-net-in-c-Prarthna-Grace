@@ -37,7 +37,7 @@ if (name == NULL || name[0] == '\0') {
 }
 
 void addCodeifValid(char currentCode, char prevCode, char *soundex, int *sIndex) {
-    if (code != '0' && currentCode != prevCode) { // Check if the code should be added
+    if (currentCode != '0' && currentCode != prevCode) { // Check if the code should be added
         soundex[(*sIndex)++] = currentCode;
     }
 }
