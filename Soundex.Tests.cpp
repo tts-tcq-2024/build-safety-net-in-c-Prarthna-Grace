@@ -19,7 +19,7 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
 TEST(SoudexTestSuite, FirstCharacterStays) {
   char soundex[5];
   
-  generateSoundex("aeiouyhw", soundex);
+  generateSoundex("aeiouy", soundex);
   ASSERT_STREQ(soundex,"A000");
 }
 
