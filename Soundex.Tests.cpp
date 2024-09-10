@@ -7,6 +7,6 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   generateSoundex("Robert", soundex);
   ASSERT_STREQ(soundex,"A200");
  
- // ASSERT_STREQ("Robert", "A200");
+ // ASSERT_STREQ("Robert", "R163");
 
 }
