@@ -53,17 +53,20 @@ void first_letter(char *name, char *soundex)
 }
 
 void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len) {
-    for (int i = 1; i < len && *sIndex < 4; i++) {
+    while(i<4) {
         char currentCode = getSoundexCode(name[i]);
         char nextCode = (i + 1 < len) ? getSoundexCode(name[i + 1]) : '0';
 
+        //Handling vowels in between adjacent codes
         if (currentCode=='7' && *prevCode == nextCode) {
             *prevCode = currentCode;
+            i++;
         }
         // Add current code if it should be included
         if (currentCode != '0' && currentCode != *prevCode) {
             soundex[(*sIndex)++] = currentCode;
             *prevCode = currentCode;
+            i++;
         }
     }
 }
