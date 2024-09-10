@@ -12,31 +12,22 @@ void first_letter(char *name, char *soundex);
 void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len);
 void zero_Padding(char *soundex);
 
-// Define and initialize the Soundex codes array
-static char soundexCodes[256];
-
-// Function to initialize the Soundex codes array
-void initializeSoundexCodes() {
-    // Initialize all characters to default Soundex code '0'
-    for (int i = 0; i < 256; i++) {
-        soundexCodes[i] = '0';
-    }
-    soundexCodes['B'] = soundexCodes['F'] = soundexCodes['P'] = soundexCodes['V'] = '1';
-    soundexCodes['C'] = soundexCodes['G'] = soundexCodes['J'] = soundexCodes['K'] = '2';
-    soundexCodes['Q'] = soundexCodes['S'] = soundexCodes['X'] = soundexCodes['Z'] = '2';
-    soundexCodes['D'] = soundexCodes['T'] = '3';
-    soundexCodes['L'] = '4';
-    soundexCodes['M'] = soundexCodes['N'] = '5';
-    soundexCodes['R'] = '6';
-    soundexCodes['A'] = soundexCodes['E'] = soundexCodes['I'] = soundexCodes['O'] = soundexCodes['U'] = '7';
-    //  others default to '0'
-}
-
-// Returns the Soundex code for a given character
-char getSoundexCode(char c) {
-    return soundexCodes[toupper(c)];
-}
+// Define the mapping for Soundex codes
+const char soundexMapping[26] = {
+    '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', // A-J
+    '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', // K-T
+    '0', '1', '0', '2', '0', '2'  // U-Z
+};
  
+// Function to get the Soundex code for a character
+char getSoundexCode(char c) {
+    c = toupper(c);
+    if (c >= 'A' && c <= 'Z') {
+        return soundexMapping[c - 'A']; // Map letter to code
+    }
+    return '0'; // For non-alphabet characters
+}
+
 // Check for NULL or empty string
 void null_check(const char *name, char *soundex)
 {
