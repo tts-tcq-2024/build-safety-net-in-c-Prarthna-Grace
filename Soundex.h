@@ -8,7 +8,7 @@
 char getSoundexCode(char c);
 void null_check(const char *name, char *soundex);
 void addCodeifValid(char currentCode, char prevCode, char *soundex, int *sIndex);
-void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len);
+void appendSoundexCode(const char *name, char *soundex, int *sIndex, int len);
 void zero_Padding(char *soundex);
 
 // Define the mapping for Soundex codes
@@ -42,19 +42,19 @@ void addCodeifValid(char currentCode, char prevCode, char *soundex, int *sIndex)
     }
 }
 
+//Function to fill the extra spaces with zeros.
+void zero_Padding(char *soundex, int *sIndex) {
+    while(*sIndex < 4) {
+        soundex[*sIndex++] = '0';
+    }
+    soundex[4] = '\0';
+}
+
 void appendSoundexCode(const char *name, char *soundex, int *sIndex, int len) {
     for (int i = 1; i < len && *sIndex < 4; i++) {
         char currentCode = getSoundexCode(name[i]);
         addCodeifValid(currentCode, soundex[*sIndex - 1], soundex, sIndex);
     }
-}
-
-//Function to fill the extra spaces with zeros.
-void zero_Padding(char *soundex, int *sIndex) {
-    while(*sIndex<4) {
-        soundex[*sIndex++] = '0';
-    }
-    soundex[4] = '\0';
 }
 
 void generateSoundex(const char *name, char *soundex) {
