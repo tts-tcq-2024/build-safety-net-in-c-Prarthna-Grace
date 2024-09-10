@@ -7,7 +7,7 @@
 
 char getSoundexCode(char c);
 void null_check(const char *name, char *soundex);
-void first_letter(char *name, char *soundex);
+void addCodeifValid(char currentCode, char prevCode, char *soundex, int *sIndex);
 void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len);
 void zero_Padding(char *soundex);
 
@@ -36,46 +36,34 @@ if (name == NULL || name[0] == '\0') {
 }
 }
 
-void first_letter(char *name, char *soundex)
-{
-    // Keep the first letter unchanged
-    soundex[0] = toupper(name[0]);  
-}
-
-void appendSoundexCode(const char *name, char *soundex, int *sIndex, char *prevCode, int len) {
-    for (int i = 1; i < len && *sIndex < 4; i++) {
-        char currentCode = getSoundexCode(name[i]);
-        char nextCode = (i + 1 < len) ? getSoundexCode(name[i + 1]) : '0';
-
-        //Handling vowels in between adjacent codes
-        if (currentCode=='7' && *prevCode == nextCode) {
-            *prevCode = currentCode;
-            i++;
-        }
-        // Add current code if it should be included
-        if (currentCode != '0' && currentCode != *prevCode) {
-            soundex[(*sIndex)++] = currentCode;
-            *prevCode = currentCode;
-            i++;
-        }
+void addCodeifValid(char currentCode, char prevCode, char *soundex, int *sIndex) {
+    if (code != '0' && currentCode != prevCode) { // Check if the code should be added
+        soundex[(*sIndex)++] = currentCode;
     }
 }
 
-void zero_Padding(char *soundex) {
-    int len = strlen(soundex); /* len - current length of the soundex code */
-    while(len<4) {
-        soundex[len++] = '0';
+void appendSoundexCode(const char *name, char *soundex, int *sIndex, int len) {
+    for (int i = 1; i < len && *sIndex < 4; i++) {
+        char currentCode = getSoundexCode(name[i]);
+        addCodeifValid(currentCode, soundex[*sIndex - 1], soundex, sIndex);
+    }
+}
+
+//Function to fill the extra spaces with zeros.
+void zero_Padding(char *soundex, int *sIndex) {
+    while(*sIndex<4) {
+        soundex[*sIndex++] = '0';
     }
     soundex[4] = '\0';
 }
 
 void generateSoundex(const char *name, char *soundex) {
+    soundex[0] = toupper(name[0]); // Set the first letter of the Soundex code
     int len = strlen(name);   
     null_check(name, soundex); 
     int sIndex = 1;
-    char prevCode = getSoundexCode(name[0]);
-    appendSoundexCode(name, soundex, &sIndex, &prevCode, len);
-    zero_Padding(soundex);
+    appendSoundexCode(name, soundex, &sIndex, len);
+    zero_Padding(soundex,&sIndex);
 }
 
 #endif // SOUNDEX_H
