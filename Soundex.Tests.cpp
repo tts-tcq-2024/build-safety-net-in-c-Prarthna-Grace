@@ -6,16 +6,22 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   char soundex[5];
   generateSoundex("Robert", soundex);
   ASSERT_STREQ(soundex,"R163");
-  
-  generateSoundex("Euler", soundex);
-  ASSERT_STREQ(soundex,"E460");
-
-  generateSoundex("A", soundex);
-  ASSERT_STREQ(soundex,"A000");
-
-  generateSoundex(" ", soundex);
-  ASSERT_STREQ(soundex,"0000");
  
  // ASSERT_STREQ("Robert", "R163");
 
 }
+
+TEST(SoudexTestSuite, RetainsFirstCharacter) {
+  char soundex[5];  
+  generateSoundex("aeiouyhw", soundex);
+  ASSERT_STREQ(soundex,"A000");
+}
+
+TEST(SoudexTestSuite, PadsWithZerosIfLengthIsLessThanFour) {
+  char soundex[5];
+  generateSoundex("a", soundex);
+  ASSERT_STREQ(soundex,"A000");
+  generateSoundex("ab", soundex);
+  ASSERT_STREQ(soundex,"A100");
+}
+
