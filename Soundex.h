@@ -54,6 +54,7 @@ void appendSoundexCode(const char *name, char *soundex, int *sIndex, int len) {
     for (int i = 1; i < len && *sIndex < 4; i++) {
         char currentCode = getSoundexCode(name[i]);
         addCodeifValid(currentCode, soundex[*sIndex - 1], soundex, sIndex);
+        zero_Padding(soundex,&sIndex);
     }
 }
 
@@ -63,7 +64,7 @@ void generateSoundex(const char *name, char *soundex) {
     null_check(name, soundex); 
     int sIndex = 1;
     appendSoundexCode(name, soundex, &sIndex, len);
-    zero_Padding(soundex,&sIndex);
+    
 }
 
 #endif // SOUNDEX_H
