@@ -1,0 +1,22 @@
+Test cases: 
+
+1. Null strings
+I/P : " "        -->           O/P : " " 
+
+2. Replace strings with the Soundex codes:
+I/P :  Jackson → J250      
+I/P :  Write → W623
+
+3. Considering Vowels.
+I/P : Harris → H620
+I/P : Oscar → O260
+I/P : Alice → 
+
+4. Retains first character.
+I/P : Oliver → O416
+I/P : Eve → E100
+I/P : Charles → C642
+
+5. H & W ignored.
+I/P : Wright → W623 //W is retained as it is the first letter and h is ignored.
+I/P : Hatch → H320 //First H is retained and second H is ignored.
