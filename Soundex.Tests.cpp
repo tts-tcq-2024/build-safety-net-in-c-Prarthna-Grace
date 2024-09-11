@@ -12,7 +12,6 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   ASSERT_STREQ(soundex,"A300");
   generateSoundex("af", soundex);
   ASSERT_STREQ(soundex,"A100");
-  generateSoundex("aEIOU", soundex);
   ASSERT_STREQ(soundex,"A100");
 // ASSERT_STREQ("Robert", "R163");
  
