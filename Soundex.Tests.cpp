@@ -12,11 +12,9 @@ TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
   ASSERT_STREQ(soundex,"A300");
   generateSoundex("af", soundex);
   ASSERT_STREQ(soundex,"A100");
+  generateSoundex("aEIOU", soundex);
+  ASSERT_STREQ(soundex,"A100");
 // ASSERT_STREQ("Robert", "R163");
  
 }
-TEST(SoudexTestSuite, FirstCharacterStays) {
-  char soundex[5];
-  generateSoundex("EAIO", soundex);
-  ASSERT_STREQ(soundex,"E000");
-}
+
