@@ -10,7 +10,6 @@ I/P :  Write → W623
 3. Considering Vowels.
 I/P : Harris → H620
 I/P : Oscar → O260
-I/P : Alice → 
 
 4. Retains first character.
 I/P : Oliver → O416
