@@ -1,30 +1,42 @@
 Test cases: 
 
 1. Null strings
-I/P : " "        -->           O/P : " " 
+
+TEST ID: TC000   |    INPUT : " "         |   OUTPUT : " "     |   Remarks:  Empty strings return no code.
 
 2. Replace strings with the Soundex codes:
-I/P :  Jackson → J250      
-I/P :  Write → W623
 
-3. Considering Vowels.
-I/P : Harris → H620
-I/P : Oscar → O260
+TEST ID: TC001   |    INPUT :  Jackson    |   OUTPUT : J250      
+TEST ID: TC002   |    INPUT :  Write      |   OUTPUT : W623
+
+3. Ignoring Vowels.
+
+TEST ID: TC003   |    INPUT : Harris      |   OUTPUT : H620
+TEST ID: TC004   |    INPUT : Oscar       |   OUTPUT : O260
 
 4. Retains first character.
-I/P : Oliver → O416
-I/P : Eve → E100
-I/P : Charles → C642
+
+TEST ID: TC005   |    INPUT : Oliver      |   OUTPUT : O416      |   Remarks: Retaining vowel as the first character 
+TEST ID: TC006   |    INPUT : E435        |   OUTPUT :  E000     |   Remarks: Retaining first character while elimination other invalid codes.
+TEST ID: TC007   |    INPUT : Charles     |   OUTPUT : C642      |   Remarks: Retaining Consonant as the first character   
 
 5. H & W ignored.
-I/P : Wright → W623 //W is retained as it is the first letter and h is ignored.
-I/P : Hatch → H320 //First H is retained and second H is ignored.
+
+TEST ID: TC008   |    INPUT : Wright      |   OUTPUT : W623      |   Remarks:  W is retained as it is the first letter and h is ignored.
+TEST ID: TC009   |    INPUT : Hatch       |   OUTPUT : H320      |   Remarks:  First H is retained and second H is ignored.
 
 6. Vowels inbetween two same codes.
-I/P : BAF --> B110 //Vowel in between 
 
-7. Two same codes separated by no vowels.
-I/P: BPF --> B100
+TEST ID: TC010   |    INPUT : BAF         |   OUTPUT : B110      |   Remarks:  Vowel in between 
+
+7. Two same codes not separated by vowels.
+
+TEST ID: TC011   |    INPUT : BPF         |   OUTPUT : B100
 
 8. Vowels together.
-I/P: AOEUI --> No code.
+
+TEST ID: TC012   |    INPUT : AOEUI       |   OUTPUT : No code
+
+8. Unkonwn charaters
+
+TEST ID: TC013   |    INPUT : 2730       |   OUTPUT : No code
