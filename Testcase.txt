@@ -20,3 +20,12 @@ I/P : Charles → C642
 5. H & W ignored.
 I/P : Wright → W623 //W is retained as it is the first letter and h is ignored.
 I/P : Hatch → H320 //First H is retained and second H is ignored.
+
+6. Vowels inbetween two same codes.
+I/P : BAF --> B110 //Vowel in between 
+
+7. Two same codes separated by no vowels.
+I/P: BPF --> B100
+
+8. Vowels together.
+I/P: AOEUI --> No code.
