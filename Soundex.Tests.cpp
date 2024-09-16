@@ -1,9 +1,19 @@
 #include <gtest/gtest.h>
 #include "Soundex.h"
-
+ 
 TEST(SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits) {
- //AAA
+//AAA
   char soundex[5];
-  generateSoundex("AX", soundex);
- // ASSERT_EQ(soundex,"A200");
+  generateSoundex("Robert", soundex);
+  ASSERT_STREQ(soundex,"R163");
+  generateSoundex("ac", soundex);
+  ASSERT_STREQ(soundex,"A200");
+  generateSoundex("ad", soundex);
+  ASSERT_STREQ(soundex,"A300");
+  generateSoundex("af", soundex);
+  ASSERT_STREQ(soundex,"A100");
+  ASSERT_STREQ(soundex,"A100");
+// ASSERT_STREQ("Robert", "R163");
+ 
 }
+

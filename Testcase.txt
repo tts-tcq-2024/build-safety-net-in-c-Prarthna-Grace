@@ -1,0 +1,42 @@
+Test cases: 
+
+1. Null strings
+
+TEST ID: TC000   |    INPUT : " "         |   OUTPUT : " "     |   Remarks:  Empty strings return no code.
+
+2. Replace strings with the Soundex codes:
+
+TEST ID: TC001   |    INPUT :  Jackson    |   OUTPUT : J250      
+TEST ID: TC002   |    INPUT :  Write      |   OUTPUT : W623
+
+3. Ignoring Vowels.
+
+TEST ID: TC003   |    INPUT : Harris      |   OUTPUT : H620
+TEST ID: TC004   |    INPUT : Oscar       |   OUTPUT : O260
+
+4. Retains first character.
+
+TEST ID: TC005   |    INPUT : Oliver      |   OUTPUT : O416      |   Remarks: Retaining vowel as the first character 
+TEST ID: TC006   |    INPUT : E435        |   OUTPUT :  E000     |   Remarks: Retaining first character while elimination other invalid codes.
+TEST ID: TC007   |    INPUT : Charles     |   OUTPUT : C642      |   Remarks: Retaining Consonant as the first character   
+
+5. H & W ignored.
+
+TEST ID: TC008   |    INPUT : Wright      |   OUTPUT : W623      |   Remarks:  W is retained as it is the first letter and h is ignored.
+TEST ID: TC009   |    INPUT : Hatch       |   OUTPUT : H320      |   Remarks:  First H is retained and second H is ignored.
+
+6. Vowels inbetween two same codes.
+
+TEST ID: TC010   |    INPUT : BAF         |   OUTPUT : B110      |   Remarks:  Vowel in between 
+
+7. Two same codes not separated by vowels.
+
+TEST ID: TC011   |    INPUT : BPF         |   OUTPUT : B100
+
+8. Vowels together.
+
+TEST ID: TC012   |    INPUT : AOEUI       |   OUTPUT : No code
+
+8. Unkonwn charaters
+
+TEST ID: TC013   |    INPUT : 2730       |   OUTPUT : No code
